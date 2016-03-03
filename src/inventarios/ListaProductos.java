@@ -5,18 +5,53 @@
  */
 package inventarios;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author david
  */
 public class ListaProductos extends javax.swing.JFrame {
-
+private DefaultTableModel tabla;
+int con = 0;
     /**
      * Creates new form ListaProductos
      */
     public ListaProductos() {
         initComponents();
+         MostrarInterfaz();
+       
+        MostrarLosDatos();
     }
+public void MostrarInterfaz()
+    {
+        
+        String data [][]={};
+      
+        String col[]=  {"Productos", "Cantidad", "Caracteristicas", "Serial"};
+        tabla = new DefaultTableModel(data, col);
+        
+        datos.setModel(tabla);
+        
+       
+    }
+
+public void MostrarLosDatos()
+        {
+            //aqui llamamos a la clase Constructores para ver los datos 
+            Constructores cont;
+            for(int i=0; i<InterfazConstructor.InterfazConstructor.size(); i++)
+            {
+                cont = (Constructores) InterfazConstructor.InterfazConstructor.get(i);
+                tabla.insertRow(con, new Object[]{});
+                tabla.setValueAt(cont.getProductos(),con , 0);
+                tabla.setValueAt(cont.getCantidad(),con , 1);
+                tabla.setValueAt(cont.getCaracteristicas(),con , 2);
+                tabla.setValueAt(cont.getSerial(),con , 3);
+              
+                
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,17 +62,33 @@ public class ListaProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        datos = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        datos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(datos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         );
 
         pack();
@@ -79,5 +130,7 @@ public class ListaProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable datos;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
